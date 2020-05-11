@@ -145,13 +145,13 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <Button variant="contained" color="primary" href="#contained-buttons" startIcon={< AddIcon/>}>
+        {/* <Button variant="contained" color="primary" href="#contained-buttons" startIcon={< AddIcon/>}>
         <Typography   >Добавить </Typography>
           </Button>
          
           <Button variant="contained" color="primary" href="#contained-buttons"  startIcon={<DeleteIcon />}>
         <Typography   >Удалить </Typography>
-          </Button>
+          </Button> */}
         <List>
           {
           [<Typography variant="h6"color="textSecondary" ><FontIcon  className="material-icons" > <HomeIcon style={{ FontSize: 30 }} /> <Link to='/' style={{ textDecoration: 'none' }}> Главная</Link> </FontIcon> </Typography>,

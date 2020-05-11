@@ -16,115 +16,145 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteIcon from '@material-ui/icons/Delete';
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 350,
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-   marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)', // угол стрелки
-  },
+import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import "./rep1.css";
+
+
+
+
+
+
+
+
+
+ 
+
+class Home extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      book4: JSON.parse(localStorage.getItem('book4'))
+    };
+
+  }
+
+
+
+
+
+
+  add() {
+
+    var title = this.refs.title.value;
+    var discription = this.refs.discription.value;
+    var time = this.refs.time.value;
+    var image = this.refs.image.value;
+    const arr = [title, discription, time, image];
+    if (localStorage.getItem('book4') == null) {
+      var book4 = [];
+      book4.push(arr);
+      localStorage.setItem('book4', JSON.stringify(book4));
+    } else {
+      var book4 = JSON.parse(localStorage.getItem('book4'));
+      book4.push(arr);
+      localStorage.setItem('book4', JSON.stringify(book4));
+    }
+    this.setState({
+      book4: JSON.parse(localStorage.getItem('book4'))
+    });
+
+    this.refs.title.value = "";
+    this.refs.discription.value = "";
+    this.refs.time.value = "";
+    this.refs.image.value = "";
+
+  }
+
   
-}));
-
-export default function RecipeReviewCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-  return (
-    <Card className={classes.root}>
-      <CardHeader 
-      title="Закуска "
-      
-        
-       // title="Shrimp and Chorizo Paella"
-        //subheader="September 14, 2016"
-      />
-      <CardMedia
-        className={classes.media}
-        image="https://avatars.mds.yandex.net/get-pdb/51720/7482e04a-8efd-4714-abd8-50d85183ce32/s1200?webp=false"
-       
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        Картофель — 1 кг<br/>
-        Морковь — 1 шт<br/>
-        Лук репчатый — 1 шт<br/>
-        Помидор — 1 шт<br/>
-        Приправа (для картофеля, у меня торговой марки "Камис") — 2 ст. л.<br/>
-        Масло растительное (без запаха) — 1 ст. л.<br/>
-        Масло оливковое (extra virgin, здесь пропорций нет, по желанию и по вкусу, можно и без него обойтись)<br/>
-        Зелень (по вкусу)<br/>
-        Чеснок (по вкусу)<br/>
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-      <IconButton aria-label="delete" className={classes.margin} >
-        
-        {/* className={
-      this.props.deleteBlock(this.props.index)}, */}
-
-        <DeleteIcon fontSize="large" />
-      </IconButton>
-        
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-
-        <CardContent>
-          <Typography paragraph>Способ приготовления:</Typography>
-          <Typography paragraph>
-            В среднем по времени 1-1,5 часа
-          </Typography>
-          <Typography paragraph>
-          1.Картошку нарезать, как хотите, но только не тонкой соломкой. Иначе велика вероятность того, что она в кашу превратится, а нам этого не надо. Лук режем тонкими полукольцами. Морковку - длинными брусочками, так просто покрасивее получится. Помидор натереть на терке и добавить к картофелю. Он придаст сочности, компенсируя количество масла. Все сложить в миску. Добавить приправу. Если приправа с солью, то солить больше и не надо. Дальше добавить масло растительное. На килограмм картофеля у меня идет ровно одна столовая ложка всего. Этого достаточно. Если бы жарили на сковородке, то таким количеством вряд ли бы обошлись. Перемешать.<br/>
-
-
-2.Упаковываем все в рукав для запекания, ставим в духовку, засекаем времечко и... свободны! Килограмм картошки у меня при температуре 180 градусов запекается ровно полтора часа. Духовки, конечно, у всех разные и со временем приготовления каждая хозяйка должна определиться сама, для этого достаточно один раз приготовить и будете точно знать сколько времени Вам потребуется. Когда будете готовить в первый раз, ни в коем случае не уходить «с собакой гулять» :). В первый раз, как в первый класс - надо все контролировать. Мало ли... Потом, когда готовка пойдет на "автомате", то можно хоть на маникюр идти.<br/>
-
-
-3.Картошечка готова, разрезаем пленку, вот посмотрите какая красивая.<br/>
-
-
-4.Дальше нарезаем меленько зелень и чесночок, добавляем к картошке, прикрываем пленкой и пускай настоится и пропитается ароматами минут пять.<br/>
-
-
-5.Дальше раскладываем по тарелочкам. У нас получилась абсолютно натуральная жареная картошка, как на сковородке, только масла раза в три-четыре меньше и проблем тоже. И не такая засушенная, как просто на противне. И следить не надо, когда прочувствуете рецепт.<br/>
-Вкусссно!!<br/>
-          </Typography>
-          
-          
-        </CardContent>
-      </Collapse>
-
-          {/*////////////////////////// */}
-
-     
-
-    </Card>
+  delete(e) {
+    var index = e.target.getAttribute('data-key');
+    var list = JSON.parse(localStorage.getItem('book4'));
     
-  );
+    list.splice(index,1);
+    this.setState({
+      book4: list
+    });
+
+    localStorage.setItem('book4', JSON.stringify(list));
+    
+  }
+
+
+  render() {
+    
+    return (
+      <div>
+        <div>
+
+          <input type="text" placeholder="Название блюда" ref="title" />
+          <input type="text" placeholder="URL картинки" ref="image" />
+          <input type="text" placeholder="Ингридиенты" ref="discription" />
+          <input type="text" placeholder="Способ приготовления" ref="time" />
+          < Button variant="contained" color="primary"  startIcon={< AddIcon/>}onClick={this.add.bind(this)}>
+          <Typography   >Добавить </Typography>
+          </Button>
+        </div>
+        
+        
+
+
+
+        {this.state.book4.map(function (books4, index) {
+          {
+
+
+            return (
+              <div className="contact-card">
+                <Card > 
+                  <Typography  > {books4[0]}  </Typography>
+                  <CardHeader > </CardHeader>
+
+                  <div className="contact-media">
+                    
+                    <img src={books4[3]}></img>
+                    
+                  </div>
+                  <Typography variant="h6" >Ингридиенты</Typography>
+
+
+                  <CardContent> <Typography variant="body1" color="textSecondary" component="p"> {books4[1]} </Typography></CardContent>
+                  <CardActions disableSpacing>
+
+                    <IconButton aria-label="delete" >
+                    
+                      <DeleteIcon fontSize="large" data-key={index} onClick={this.delete.bind(this)} />
+                    </IconButton>
+
+                    
+                    
+</CardActions>
+                    <div className="collapse-card">
+                  
+                  
+                  
+                  <CardContent>{books4[2]}</CardContent></div>
+
+
+                </Card>
+              </div>
+            );
+          }
+        }, this)}
+
+
+
+      </div >
+    );
+  }
+
+
 }
+export default Home;
